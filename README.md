@@ -20,3 +20,22 @@
 - require fewer resources
 - efficiency and safety
 - Go use for server-side or back-end side
+
+## `Init Go Mudule`
+
+```
+go mod init <module path>
+```
+
+## `File Structure Go`
+
+1. package
+   - ทุก Go file จะต้องมี package
+   - first statement ของ Go file ก็คือ package
+2. main function
+   - เป็น entrypoint ของ Go app
+   - เพื่อบอกให้ Go รู้ว่าจะต้อง start execute ที่ไหน
+3. import built-in package
+   - Go program จะมี built-in package ที่จำเป็นมาให้เรียบร้อย
+
+`Note :` https://pkg.go.dev/std
