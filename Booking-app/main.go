@@ -7,7 +7,14 @@ package main
 	- ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
 */
 
+/*
+	import another package in main
+	- path import <module name>/<folder package name>
+	- วิธีเรียกเอา <folder package name> มาดอทใช้ function,value
+	- ต้อง export value,function จาก another package ด้วย ถ้าต้องการจะเอามาใช้ที่นี่ (เปลี่ยนให้เป็น capital case)
+*/
 import (
+	"booking-app/helper"
 	"fmt"
 	"strings"
 )
@@ -25,7 +32,7 @@ func main() {
 	for {
 
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
