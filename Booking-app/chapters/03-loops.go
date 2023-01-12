@@ -13,7 +13,10 @@ func loops() {
 
 		1.Infinity loop
 
-		for {
+		- สามารถใส่ condition ให้ loop เพื่อเช็คว่าจะ loop ต่อหรือไม่ (ไม่ใส่ condition ก็ได้ มันก็จะ infinity loop)
+		- ถ้า condition = true(loop ต่อ),ถ้า condition = false(loop หยุด)
+
+		for (condition) {
 
 		}
 
@@ -22,6 +25,10 @@ func loops() {
 		for 'index', 'element' := range 'array' {
 
 		}
+
+		Note:
+		- หยุด loop ด้วย break (terminate the for loop)
+		- ให้ทำ loop ต่อไปด้วย continue (มันจะ skip loop ต่อไปเลยโดยที่ไม่สน statement ที่เหลือ)
 	*/
 	const conferenceTickets int = 50
 	var remainingTickets uint = 50
