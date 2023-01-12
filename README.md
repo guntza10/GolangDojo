@@ -27,6 +27,12 @@
 go mod init <module path>
 ```
 
+## `Run Go`
+
+```
+go run <name go file>
+```
+
 ## `File Structure Go`
 
 1. package
