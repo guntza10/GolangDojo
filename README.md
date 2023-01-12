@@ -31,6 +31,7 @@ go mod init <module path>
 
 ```
 go run <name go file>
+go run . => run ทุกไฟล์ที่อยู่ใน directory นี้
 ```
 
 ## `File Structure Go`

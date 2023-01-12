@@ -1,42 +1,35 @@
 package main
 
-/*
-	package
-	- Go program ถูกจัดการใน package
-	- package คือ collection ของ Go file
-	- ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
-*/
-
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
-const conferenceTickets int = 50
+const conferenceTickets2 int = 50
 
-var remainingTickets uint = 50
-var conferenceName = "Go Conference"
-var bookings = []string{}
+var remainingTickets2 uint = 50
+var conferenceName2 = "Go Conference"
+var bookings2 = make([]map[string]string, 0)
 
-func main() {
+func maps() {
 
 	greetUsers()
 
 	for {
 
-		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		firstName, lastName, email, userTickets := getUserInput2()
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput2(firstName, lastName, email, userTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			bookTicket(userTickets, firstName, lastName, email)
+			bookTicket2(userTickets, firstName, lastName, email)
 
-			firstNames := printFirstNames()
+			firstNames := printFirstNames2()
 			fmt.Printf("The first names %v\n", firstNames)
 
 			if remainingTickets == 0 {
 				// end program
-				fmt.Println("Program End!!!")
 				break
 			}
 		} else {
@@ -54,17 +47,16 @@ func main() {
 	}
 }
 
-func printFirstNames() []string {
+func printFirstNames2() []string {
 	firstNames := []string{}
 
-	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+	for _, booking2 := range bookings2 {
+		firstNames = append(firstNames, booking2["firstName"])
 	}
 	return firstNames
 }
 
-func getUserInput() (string, string, string, uint) {
+func getUserInput2() (string, string, string, uint) {
 	var firstName string
 	var lastName string
 	var email string
@@ -85,13 +77,28 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func greetUsers() {
+func validateUserInput2(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
+	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+	isValidEmail := strings.Contains(email, "@")
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+	return isValidName, isValidEmail, isValidTicketNumber
+}
+
+func greetUsers2() {
 	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
 }
 
-func bookTicket(userTickets uint, firstName string, lastName string, email string) {
+func bookTicket2(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+
+	// create user map
+	var user = make(map[string]string)
+	user["firstName"] = firstName
+	user["lastName"] = lastName
+	user["email"] = email
+	user["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
+	bookings = append(bookings, user)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)

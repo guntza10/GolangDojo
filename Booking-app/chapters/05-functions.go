@@ -1,17 +1,32 @@
 package main
 
-/*
-	package
-	- Go program ถูกจัดการใน package
-	- package คือ collection ของ Go file
-	- ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
-*/
-
 import (
 	"fmt"
 	"strings"
 )
 
+/*
+function => encapsulate code ที่ logic ทำ action บางอย่างเดียวกัน
+- function จะถูก execute ก็ต่อเมื่อมีการ call
+- function สามารถ call ได้หลายครั้ง
+- function ช่วยลด duplicated code
+
+func name(valueName type) {
+
+}
+*/
+
+/*
+package level variables
+- กำหนด variable ไว้ด้านนอกสุดของทุก function
+- ทุก function สามารถ access ได้หมด
+- ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
+- ไม่สามารถใช้ Syntactic Sugar short hand ได้
+
+local variables
+- กำหนดใน function หรือ block state
+- สามารถ access ได้แค่ใน function หรือ block state นั้นๆที่ declare เท่านั้น
+*/
 const conferenceTickets int = 50
 
 var remainingTickets uint = 50
@@ -24,6 +39,7 @@ func main() {
 
 	for {
 
+		// get data from function return multiple value
 		firstName, lastName, email, userTickets := getUserInput()
 		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
 
@@ -36,7 +52,6 @@ func main() {
 
 			if remainingTickets == 0 {
 				// end program
-				fmt.Println("Program End!!!")
 				break
 			}
 		} else {
@@ -54,6 +69,14 @@ func main() {
 	}
 }
 
+/*
+function return
+- กำหนด type ของ function ให้ตรงกับ type ของ value ที่ต้องการ return
+
+	funct name() type {
+		return v
+	}
+*/
 func printFirstNames() []string {
 	firstNames := []string{}
 
@@ -62,6 +85,21 @@ func printFirstNames() []string {
 		firstNames = append(firstNames, names[0])
 	}
 	return firstNames
+}
+
+/*
+function return multiple value
+- กำหนด type ของ function ให้ตรงกับ type ของ value ที่ต้องการ return
+
+	funct name() (type,type,type) {
+		return v1,v2,v3
+	}
+*/
+func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
+	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+	isValidEmail := strings.Contains(email, "@")
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+	return isValidName, isValidEmail, isValidTicketNumber
 }
 
 func getUserInput() (string, string, string, uint) {

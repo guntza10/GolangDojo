@@ -1,24 +1,24 @@
 package main
 
-/*
-	package
-	- Go program ถูกจัดการใน package
-	- package คือ collection ของ Go file
-	- ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
-*/
-
 import (
 	"fmt"
 	"strings"
 )
 
-const conferenceTickets int = 50
+const conferenceTickets3 int = 50
 
-var remainingTickets uint = 50
-var conferenceName = "Go Conference"
-var bookings = []string{}
+var remainingTickets3 uint = 50
+var conferenceName3 = "Go Conference"
+var bookings3 = make([]User, 0)
 
-func main() {
+type User struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
+
+func structs() {
 
 	greetUsers()
 
@@ -36,7 +36,6 @@ func main() {
 
 			if remainingTickets == 0 {
 				// end program
-				fmt.Println("Program End!!!")
 				break
 			}
 		} else {
@@ -54,17 +53,16 @@ func main() {
 	}
 }
 
-func printFirstNames() []string {
+func printFirstNames3() []string {
 	firstNames := []string{}
 
-	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+	for _, booking3 := range bookings3 {
+		firstNames = append(firstNames, booking3.firstName)
 	}
 	return firstNames
 }
 
-func getUserInput() (string, string, string, uint) {
+func getUserInput3() (string, string, string, uint) {
 	var firstName string
 	var lastName string
 	var email string
@@ -85,13 +83,29 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func greetUsers() {
-	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
+func validateUserInput3(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
+	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+	isValidEmail := strings.Contains(email, "@")
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+	return isValidName, isValidEmail, isValidTicketNumber
 }
 
-func bookTicket(userTickets uint, firstName string, lastName string, email string) {
-	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+func greetUsers3() {
+	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName3, conferenceTickets3, remainingTickets3)
+}
+
+func bookTicket3(userTickets uint, firstName string, lastName string, email string) {
+	remainingTickets3 = remainingTickets3 - userTickets
+
+	// create user map
+	var user = User{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	}
+
+	bookings = append(bookings, user)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
