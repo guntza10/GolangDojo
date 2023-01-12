@@ -48,7 +48,7 @@ func variable() {
 		- float = suitable for Statistical data,Monetary data
 	*/
 
-	// declare,assign value (Syntactic Sugar)
+	// declare,assign value (Syntactic Sugar) => short hand
 	testValue := "2morrowboyz"
 	fmt.Println(testValue)
 	fmt.Println("=================================")
