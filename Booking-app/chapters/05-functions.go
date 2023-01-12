@@ -17,15 +17,18 @@ func name(valueName type) {
 */
 
 /*
-package level variables
+Package level variables
 - กำหนด variable ไว้ด้านนอกสุดของทุก function
 - ทุก function สามารถ access ได้หมด
 - ทุกอย่างใน file ที่อยู่ใน package เดียวกัน ก็สามารถ access ได้หมด
 - ไม่สามารถใช้ Syntactic Sugar short hand ได้
 
-local variables
+Local level variables
 - กำหนดใน function หรือ block state
 - สามารถ access ได้แค่ใน function หรือ block state นั้นๆที่ declare เท่านั้น
+
+Global level variables
+- declare ชื่อให้เป็น capital case
 */
 const conferenceTickets2 int = 50
 
