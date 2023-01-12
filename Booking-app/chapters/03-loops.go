@@ -1,4 +1,4 @@
-package main
+package chapters
 
 // import multiple packages
 import (
