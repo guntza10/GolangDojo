@@ -1,4 +1,4 @@
-package main
+package chapters
 
 import (
 	"fmt"
@@ -34,7 +34,7 @@ func structs() {
 			firstNames := printFirstNames()
 			fmt.Printf("The first names %v\n", firstNames)
 
-			if remainingTickets == 0 {
+			if remainingTickets3 == 0 {
 				// end program
 				break
 			}
@@ -56,8 +56,8 @@ func structs() {
 func printFirstNames3() []string {
 	firstNames := []string{}
 
-	for _, booking3 := range bookings3 {
-		firstNames = append(firstNames, booking3.firstName)
+	for _, booking := range bookings3 {
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -86,7 +86,7 @@ func getUserInput3() (string, string, string, uint) {
 func validateUserInput3(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets3
 	return isValidName, isValidEmail, isValidTicketNumber
 }
 
@@ -105,8 +105,8 @@ func bookTicket3(userTickets uint, firstName string, lastName string, email stri
 		numberOfTickets: userTickets,
 	}
 
-	bookings = append(bookings, user)
+	bookings3 = append(bookings3, user)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets3, conferenceName3)
 }
