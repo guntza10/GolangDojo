@@ -1,4 +1,4 @@
-package main
+package chapters
 
 import (
 	"fmt"
@@ -27,30 +27,30 @@ local variables
 - กำหนดใน function หรือ block state
 - สามารถ access ได้แค่ใน function หรือ block state นั้นๆที่ declare เท่านั้น
 */
-const conferenceTickets int = 50
+const conferenceTickets2 int = 50
 
-var remainingTickets uint = 50
-var conferenceName = "Go Conference"
-var bookings = []string{}
+var remainingTickets2 uint = 50
+var conferenceName2 = "Go Conference"
+var bookings2 = []string{}
 
-func main() {
+func function() {
 
-	greetUsers()
+	greetUsers2()
 
 	for {
 
 		// get data from function return multiple value
-		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets)
+		firstName, lastName, email, userTickets := getUserInput2()
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput2(firstName, lastName, email, userTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			bookTicket(userTickets, firstName, lastName, email)
+			bookTicket2(userTickets, firstName, lastName, email)
 
-			firstNames := printFirstNames()
+			firstNames := printFirstNames2()
 			fmt.Printf("The first names %v\n", firstNames)
 
-			if remainingTickets == 0 {
+			if remainingTickets2 == 0 {
 				// end program
 				break
 			}
@@ -77,10 +77,10 @@ function return
 		return v
 	}
 */
-func printFirstNames() []string {
+func printFirstNames2() []string {
 	firstNames := []string{}
 
-	for _, booking := range bookings {
+	for _, booking := range bookings2 {
 		var names = strings.Fields(booking)
 		firstNames = append(firstNames, names[0])
 	}
@@ -95,14 +95,14 @@ function return multiple value
 		return v1,v2,v3
 	}
 */
-func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
+func validateUserInput2(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets2
 	return isValidName, isValidEmail, isValidTicketNumber
 }
 
-func getUserInput() (string, string, string, uint) {
+func getUserInput2() (string, string, string, uint) {
 	var firstName string
 	var lastName string
 	var email string
@@ -123,14 +123,14 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func greetUsers() {
-	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName, conferenceTickets, remainingTickets)
+func greetUsers2() {
+	fmt.Printf("Welcome to %v booking application.\nWe have total of %v tickets and %v are still available.\nGet your tickets here to attend\n", conferenceName2, conferenceTickets2, remainingTickets2)
 }
 
-func bookTicket(userTickets uint, firstName string, lastName string, email string) {
-	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+func bookTicket2(userTickets uint, firstName string, lastName string, email string) {
+	remainingTickets2 = remainingTickets2 - userTickets
+	bookings2 = append(bookings2, firstName+" "+lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets2, conferenceName2)
 }
