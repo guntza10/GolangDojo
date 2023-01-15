@@ -64,6 +64,7 @@ func printFirstNames() []string {
 	firstNames := []string{}
 
 	for _, booking := range bookings {
+		// get value from map with key
 		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
