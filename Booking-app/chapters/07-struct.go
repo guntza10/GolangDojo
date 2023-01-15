@@ -5,12 +5,18 @@ import (
 	"strings"
 )
 
+/*
+struct
+- ก็คือ class ในภาษาอื่นๆ (doesn't support inheritance)
+- define key pair กับ value ได้หลาย type (property)
+*/
 const conferenceTickets3 int = 50
 
 var remainingTickets3 uint = 50
 var conferenceName3 = "Go Conference"
 var bookings3 = make([]User, 0)
 
+// declare struct
 type User struct {
 	firstName       string
 	lastName        string
@@ -57,6 +63,7 @@ func printFirstNames3() []string {
 	firstNames := []string{}
 
 	for _, booking := range bookings3 {
+		// get property from struct ใช้ dot
 		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
@@ -97,7 +104,7 @@ func greetUsers3() {
 func bookTicket3(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets3 = remainingTickets3 - userTickets
 
-	// create user map
+	// define struct value
 	var user = User{
 		firstName:       firstName,
 		lastName:        lastName,
