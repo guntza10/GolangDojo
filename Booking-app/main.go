@@ -33,6 +33,15 @@ type UserData struct {
 	numberOfTickets uint
 }
 
+/*
+WaitGroup => มี 3 function
+- Add(no) => จะเป็นการบอก main thread ว่ามีจำนวน thread เท่าไรที่มันต้องรอและต้อง execute ก่อนที่จะ สร้าง new thread
+- Wait() => จำเป็นต้อง execute ไว้ตอนสุดท้ายของ main thread มันจะรอจนกว่าทุก thread จะ done (WaitGroup list เป็น 0 ไม่เหลือ thread)
+จะทำงานก่อนที่ app จะ exit terminate ทุกอย่าง
+- Done() => จำเป็นต้อง execute ไว้ตอนสุดท้ายของ separated thread(Goroutine thread) เมื่อถูก call มันจะทำการลดจำนวน WaitGroup ลง 1
+(remove thread ที่อยู่ใน WaitGroup list ออกไป 1)
+*/
+// use Synchronizing Goroutine
 var wg = sync.WaitGroup{}
 
 func main() {
@@ -47,7 +56,9 @@ func main() {
 
 		bookTicket(userTickets, firstName, lastName, email)
 
+		// บอก main thread ว่ามี 1 thread ที่ต้องรอและ execute
 		wg.Add(1)
+		// use Goroutine => separate thread execute
 		go sendTicket(userTickets, firstName, lastName, email)
 
 		firstNames := getFirstNames()
@@ -134,3 +145,20 @@ func sendTicket(userTickets uint, firstName string, lastName string, email strin
 	fmt.Println("#################")
 	wg.Done()
 }
+
+/*
+Goroutine - Concurrency
+- ปกติเวลาเรา execute app มันจะรันเป็น single thread ตั้งแต่ต้นจนจบตามลำดับ
+- ถ้ามี process ใดที่ใช้เวลาในการ execute นาน จะทำให้ thread ติด block
+- ทำให้ code process ในบรรทัดต่อไปต้องรอ process ก่อนหน้าให้ execute เสร็จก่อน
+- เราจะใช้ Goroutine(keyword go) เข้ามาช่วย
+- โดยที่ Goroutine จะแยก thread ของ process ที่ใช้เวลานานออกมา execute ต่างหาก (run in background)
+*/
+
+/*
+Synchronizing the Goroutines
+- ปัญหาคือ main thread execute เสร็จก่อนที่ตัว Goroutine จะเริ่มและ execute code
+- main thread ไม่ได้รอ Goroutine execute
+- พอ main thread execute เสร็จมัน app ก็จบการทำงานพร้อมกับ terminate ทุก thread ทิ้ง
+- เราใช้ `WaitGroup` เข้ามาช่วย เพื่อบอกให้ตัว main thread รอ Goroutine execute
+*/
