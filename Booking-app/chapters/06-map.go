@@ -8,8 +8,21 @@ import (
 
 const conferenceTickets int = 50
 
+/*
+map => data type ที่เป็น object เหมือนภาษาอื่นๆ ที่จะเก็บข้อมูลเป็นก้อนด้วย key(property) map กับ value
+- map[type_key]type_value (เป็นแค่การ declare type)
+- ทุก key จะต้องมี data type เหมือนกัน
+- ทุก value จะต้องมี data type เหมือนกัน
+- create empty map => make(map[type_key]type_value)
+*/
 var remainingTickets uint = 50
 var conferenceName = "Go Conference"
+
+/*
+วิธีการสร้าง slice ของ map (list of map)
+- จะไม่เหมือนทั่วไป ([]type => []map[type_key]type_value แบบนี้ผิด)
+- ต้องสร้างผ่าน make => make([]map[type_key]type_value, initail_size)
+*/
 var bookings = make([]map[string]string, 0)
 
 func main() {
@@ -93,9 +106,14 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 
 	// create user map
 	var user = make(map[string]string)
+	/*
+		define value ให้ map
+		- mapData[key] = value
+	*/
 	user["firstName"] = firstName
 	user["lastName"] = lastName
 	user["email"] = email
+	// strconv เอาไว้ convert type ต่างๆให้เป็น string ดูต่อได้ที่ document
 	user["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	bookings = append(bookings, user)
