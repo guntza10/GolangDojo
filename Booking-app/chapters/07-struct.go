@@ -9,6 +9,7 @@ import (
 struct
 - ก็คือ class ในภาษาอื่นๆ (doesn't support inheritance)
 - define key pair กับ value ได้หลาย type (property)
+- declare struct นอก function
 */
 const conferenceTickets3 int = 50
 
